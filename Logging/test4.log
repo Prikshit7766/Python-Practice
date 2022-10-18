@@ -1,0 +1,21 @@
+ ERROR 2022-08-19 00:35:52,470 root  division by zero
+Traceback (most recent call last):
+  File "D:/full_stack/MyPractice/Python/pycharm/Logging/test3.py", line 7, in div
+    div= a/b
+ZeroDivisionError: division by zero
+ INFO 2022-08-19 00:37:51,088 root  the number entered by user 3 and 1 
+ INFO 2022-08-19 00:37:51,089 root  we are into function
+ INFO 2022-08-19 00:37:51,089 root  we have completed a division operation
+ INFO 2022-08-19 00:37:51,089 root  the number entered by user 3 and 0 
+ INFO 2022-08-19 00:37:51,089 root  we are into function
+ INFO 2022-08-19 00:37:51,089 root  division by zero
+ ERROR 2022-08-19 00:37:51,089 root  division by zero
+Traceback (most recent call last):
+  File "D:/full_stack/MyPractice/Python/pycharm/Logging/test3.py", line 7, in div
+    div= a/b
+ZeroDivisionError: division by zero
+ ERROR 2022-08-19 00:41:26,986 root  division by zero
+Traceback (most recent call last):
+  File "D:/full_stack/MyPractice/Python/pycharm/Logging/test3.py", line 7, in div
+    div= a/b
+ZeroDivisionError: division by zero
