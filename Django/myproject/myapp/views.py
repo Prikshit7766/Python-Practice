@@ -5,4 +5,11 @@ from django.http import HttpResponse
 
 # this is the index function
 def index(request):
-    return render(request, "index.html")
+    # name =  "Prikshit"
+    context = {
+        'name': "Prikshit",
+        'age': 22,
+        'city': "jammu"
+
+    }
+    return render(request, "index.html", context)
