@@ -5,13 +5,10 @@ from django.db import models
 
 # from the mode we just pass all our data into templates file
 
-class Feature:
-    id: int
-    name: str
-    detail:str
-    is_true: bool
-    icon: str
+class Feature(models.Model):
 
-    
-    def __str__(self):
-        return self.name
+    name: str = models.CharField(max_length=150)
+    detail:str = models.TextField()
+    is_true: bool = models.BooleanField()
+    icon: str = models.CharField(max_length=100)
+
