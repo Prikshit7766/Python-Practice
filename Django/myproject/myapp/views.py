@@ -31,3 +31,6 @@ def count(request):
         return render(request, "count.html", {'text': text, 'word_count': word_count})
     else:
         return HttpResponse("Method not allowed")
+    
+def index_demo(request):
+    return render(request, "index_demo.html")

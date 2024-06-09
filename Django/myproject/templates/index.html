@@ -1,11 +1,9 @@
-<html>
+{% load static %}
 
-<head>
-    <title>Home</title>
-</head>
+<link rel="stylesheet"  href="{% static 'style.css' %}">
 
-<body>
-    <p>Welcome, {{name}}!<br> Age: {{age}} years old.<br> Location: {{city}}.</p>
-    <a href="{% url 'counter_page' %}">Go to Counter Page</a>
-</body>
-</html>
+<h1> learning Django </h1>
+<p>Welcome, {{name}}!<br> Age: {{age}} years old.<br> Location: {{city}}.</p>
+<a href="{% url 'counter_page' %}">Go to Counter Page</a><br>
+<a href="{% url 'index_demo' %}">Go to Index Demo</a><br>
+

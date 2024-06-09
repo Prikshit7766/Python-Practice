@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.index, name="index"), # this is root URL, this will call the index function from views.py 
     path('counter_page', views.counter_page, name="counter_page"),
     path('count', views.count, name="count"), 
-
+    path('index_demo', views.index_demo, name="index_demo"),
 ]
 
 # suppose if the user comenst to any particular URL then what will happen ?
