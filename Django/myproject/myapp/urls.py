@@ -7,6 +7,8 @@ urlpatterns = [
     path('count', views.count, name="count"), 
     path('index_demo', views.index_demo, name="index_demo"),
     path('register', views.register, name="register"),
+    path('login', views.login, name="login"),
+    path('logout', views.logout, name="logout"),
 ]
 
 # suppose if the user comenst to any particular URL then what will happen ?
