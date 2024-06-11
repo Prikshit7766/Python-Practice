@@ -81,3 +81,10 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('index_demo')
+
+def all_posts(request):
+    post_list = [1,2,3,4,"prikshit", "hello"]
+    return render(request, "all_posts.html", {'posts': post_list})
+
+def post(request, slug):
+    return render(request, "post.html", {'slug': slug})

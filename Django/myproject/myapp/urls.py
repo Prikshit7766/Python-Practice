@@ -9,6 +9,8 @@ urlpatterns = [
     path('register', views.register, name="register"),
     path('login', views.login, name="login"),
     path('logout', views.logout, name="logout"),
+    path('all_posts', views.all_posts, name="all_posts"),
+    path('post/<str:slug>', views.post, name="post"),
 ]
 
 # suppose if the user comenst to any particular URL then what will happen ?
