@@ -1,9 +1,27 @@
-{% load static %}
+{% extends "base.html" %}
 
-<link rel="stylesheet"  href="{% static 'style.css' %}">
+{% block title %}{{page}}{% endblock %}
 
-<h1> learning Django </h1>
-<p>Welcome, {{name}}!<br> Age: {{age}} years old.<br> Location: {{city}}.</p>
-<a href="{% url 'counter_page' %}">Go to Counter Page</a><br>
-<a href="{% url 'index_demo' %}">Go to Index Demo</a><br>
+{% block heading %}{{topic}}{% endblock %}
 
+{% block content %}
+<div class="commands-section">
+    <h2>Useful Django Commands</h2>
+    <table class="commands-table">
+        <thead>
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in commands %}
+            <tr>
+                <td><code>{{ item.command }}</code></td>
+                <td>{{ item.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
