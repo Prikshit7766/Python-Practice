@@ -11,10 +11,7 @@
 <body>
     <div class="container">
         <h1>{% block heading %}{{Topic}}{% endblock %}</h1>
-        <div class="links">
-            <a href="{% url 'counter_page' %}">Go to Counter Page</a>
-            <a href="{% url 'index_demo' %}">Go to Index Demo</a>
-        </div>
+         {% block link %} {% endblock %}
     </div>
     <br>
     <div class="container">

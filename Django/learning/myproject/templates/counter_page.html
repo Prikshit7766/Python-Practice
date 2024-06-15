@@ -1,7 +1,13 @@
-<h1>Input your text below:</h1>
+{% extends 'base.html' %}
 
-<form method="POST" action="count">
-    {% csrf_token %}
-    <textarea name="text" rows="25" cols="100"></textarea><br>
-    <input type="submit">
-</form>
+{% block title %}Input Form{% endblock %}
+
+{% block heading %}Input your text below{% endblock %}
+
+{% block content %}
+    <form method="POST" action="{% url 'count' %}">
+        {% csrf_token %}
+        <textarea name="text" rows="20" cols="100"></textarea><br>
+        <input type="submit" value="Count Words">
+    </form>
+{% endblock %}

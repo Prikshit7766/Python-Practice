@@ -4,6 +4,13 @@
 
 {% block heading %}{{topic}}{% endblock %}
 
+{% block link %}
+<div class="links">
+    <a href="{% url 'counter_page' %}">Go to Counter Page</a>
+    <a href="{% url 'index_demo' %}">Go to Index Demo</a>
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="commands-section">
     <h2>Useful Django Commands</h2>

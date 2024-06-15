@@ -1,23 +1,24 @@
-<hi>Login Now</hi>
+{% extends 'base.html' %}
 
-<style>
-    h3 {
-        color: red;
+{% block title %}Login Now{% endblock %}
 
-    }
-</style>
+{% block heading %}Login Now{% endblock %}
+
+{% block content %}
+{% load static %}
 
 {% for message in messages %}
     <h3>{{ message }}</h3>
 {% endfor %}
 
-<form method="post", action="login">
+<form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <p>Username:</p>
-    <input type="text" name="username"/>
+    <input type="text" name="username" required>
     <p>Password:</p>
-    <input type="password" name="password"/><br>
+    <input type="password" name="password" required><br>
     <input type="submit" value="Login">
 </form>
 
-<p>Not registered yet? <a href="register">Register</a></p>
+<p>Not registered yet? <a href="{% url 'register' %}">Register</a></p>
+{% endblock %}
