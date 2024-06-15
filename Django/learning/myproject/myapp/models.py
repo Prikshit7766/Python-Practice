@@ -12,3 +12,7 @@ class Feature(models.Model):
     is_true: bool = models.BooleanField()
     icon: str = models.CharField(max_length=100)
 
+
+class DjangoCommand(models.Model):
+    command = models.CharField(max_length=200)
+    description = models.TextField()

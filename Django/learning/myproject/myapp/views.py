@@ -1,20 +1,21 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Feature
+from .models import Feature, DjangoCommand
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
 # Create your views here.
 
 # this is the index function
+
 def index(request):
-    # name =  "Prikshit"
+    commands = DjangoCommand.objects.all()
     context = {
-        'name': "Prikshit",
-        'age': 22,
-        'city': "jammu"
+        'page': 'Home Page',
+        'topic': 'Learning Django',
+        'commands': commands,
     }
-    return render(request, "index.html", context)
+    return render(request, 'index.html', context)
 
 def counter_page(request):
     return render(request, "counter_page.html") 
@@ -36,7 +37,6 @@ def count(request):
         return HttpResponse("Method not allowed")
     
 def index_demo(request):
-
 
     features = Feature.objects.all()
 
