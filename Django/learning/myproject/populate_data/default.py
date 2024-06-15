@@ -42,7 +42,8 @@ def populate_features():
     Feature.objects.all().delete()
 
     for data in features_data:
-        feature_obj = Feature(name=data['name'], detail=data['detail'], is_true=data['is_true'], icon=data['icon'])
+        feature_obj = Feature(name=data['name'], detail=data['detail'], is_true=data['is_true'], icon=data['icon']) #or Feature.objects.create(**data) , here objects is a model manager
+
         feature_obj.save()
 
     print("Features data overwritten in the database successfully.")
