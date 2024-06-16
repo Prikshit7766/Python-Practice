@@ -27,4 +27,45 @@
     </form>
   </div>
 </div>
+
+<!-- Form for performing actions on selected recipes -->
+<form method="POST" action="{% url 'perform_action' %}">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="action" class="form-label">Action</label>
+    <select name="action" class="form-select" id="action" required>
+      <option value="" disabled selected>Select an action</option>
+      <option value="delete">Delete</option>
+      <!-- Add more actions here if needed -->
+    </select>
+    <button type="submit" class="btn btn-secondary">Apply</button>
+  </div>
+  
+  <!-- Display the recipes in a table with checkboxes for each recipe -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Index</th>
+          <th>Recipe Name</th>
+          <th>Recipe Description</th>
+          <th>Recipe Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for recipe in recipes %}
+        <tr>
+          <td><input type="checkbox" name="selected_recipes" value="{{ recipe.id }}"></td>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ recipe.recipe_name }}</td>
+          <td>{{ recipe.recipe_description }}</td>
+          <td><img src="/media/{{recipe.recipe_image }}" class="img-fluid" style="max-width: 100px;"></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</form>
+
 {% endblock %}
