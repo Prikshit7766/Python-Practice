@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Feature, DjangoCommand
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
 
 # Create your views here.
@@ -13,11 +14,11 @@ def index(request):
         "topic": "Learning Django",
         "commands": commands,
     }
-    return render(request, "index.html", context)
+    return render(request, "myapp/index.html", context)
 
 
 def counter_page(request):
-    return render(request, "counter_page.html")
+    return render(request, "myapp/counter_page.html")
 
 
 def count(request):
@@ -25,7 +26,7 @@ def count(request):
         text = request.POST.get("text", "")
         words = text.split()
         word_count = len(words)
-        return render(request, "count.html", {"text": text, "word_count": word_count})
+        return render(request, "myapp/count.html", {"text": text, "word_count": word_count})
     else:
         return HttpResponse("Method not allowed")
 
@@ -34,7 +35,7 @@ def index_demo(request):
 
     features = Feature.objects.all()
 
-    return render(request, "index_demo.html", {"features": features})
+    return render(request, "myapp/index_demo.html", {"features": features})
 
 
 def register(request):
@@ -60,32 +61,35 @@ def register(request):
             messages.info(request, "Password Not Matching")
             return redirect("register")
 
-    return render(request, "register.html")
+    return render(request, "myapp/register.html")
 
 
 def login(request):
     if request.method == "POST":
         username = request.POST.get("username", "")
         password = request.POST.get("password", "")
-        user = User.objects.filter(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
         if user is not None:
+            auth_login(request, user)
             return redirect("index_demo")
         else:
             messages.info(request, "Invalid Credentials")
             return redirect("login")
     else:
-        return render(request, "login.html")
+        return render(request, "myapp/login.html")
+
 
 
 def logout(request):
-    auth.logout(request)
+    auth_logout(request)
     return redirect("index_demo")
+
 
 
 def all_posts(request):
     post_list = [1, 2, 3, 4, "prikshit", "hello"]
-    return render(request, "all_posts.html", {"posts": post_list})
+    return render(request, "myapp/all_posts.html", {"posts": post_list})
 
 
 def post(request, slug):
-    return render(request, "post.html", {"slug": slug})
+    return render(request, "myapp/post.html", {"slug": slug})

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'myapp/base.html' %}
 
 {% block title %}Login Now{% endblock %}
 
@@ -11,7 +11,7 @@
     <h3>{{ message }}</h3>
 {% endfor %}
 
-<form method="post" action="{% url 'login' %}">
+<form method="post" action="login">
     {% csrf_token %}
     <p>Username:</p>
     <input type="text" name="username" required>
@@ -20,5 +20,5 @@
     <input type="submit" value="Login">
 </form>
 
-<p>Not registered yet? <a href="{% url 'register' %}">Register</a></p>
+<p>Not registered yet? <a href="register">Register</a></p>
 {% endblock %}
