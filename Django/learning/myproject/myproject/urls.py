@@ -17,8 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-
+from . import views
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("myapp.urls")), # this is the root URL, this will call the index function from views.py
+    path('', views.home, name='home'),  # Home page
+    path("myapp/", include("myapp.urls")), # this is the root URL, this will call the index function from views.py
+    path("vege/", include("vege.urls")),
 ]
