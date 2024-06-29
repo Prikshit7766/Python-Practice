@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import Recipe
 from django.shortcuts import redirect
 
@@ -25,6 +25,18 @@ def perform_action(request):
         
         if action == 'delete':
             Recipe.objects.filter(id__in=selected_recipes).delete()
-        
-        
     return redirect('recipe')
+
+
+def update_recipe(request, id):
+    recipe = get_object_or_404(Recipe, id=id)
+    
+    if request.method == 'POST':
+        recipe.recipe_name = request.POST.get('recipe_name')
+        recipe.recipe_description = request.POST.get('recipe_description')
+        if 'recipe_image' in request.FILES:
+            recipe.recipe_image = request.FILES['recipe_image']
+        recipe.save()
+        return redirect('recipe')
+    
+    return render(request, 'vege/update_recipe.html', {'recipe': recipe})
