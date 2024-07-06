@@ -5,6 +5,10 @@
 {% block heading %}Add Your Favorite Recipe{% endblock %}
 
 {% block content %}
+<div class="login"> 
+  <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+</div>
+<br><br>
 <div class="form-container">
   <div class="card">
     <h2 class="text-center mb-4">Add Recipe</h2>
@@ -28,6 +32,15 @@
   </div>
 </div>
 
+<!-- Search form -->
+<form method="GET" action="{% url 'search_recipes' %}">
+  <div class="mb-3">
+    <label for="search" class="form-label">Search Recipes</label>
+    <input type="text" name="search" class="form-control" id="search" placeholder="Search by name or description">
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+  </div>
+</form>
+
 <!-- Form for performing actions on selected recipes -->
 <form method="POST" action="{% url 'perform_action' %}">
   {% csrf_token %}
@@ -40,7 +53,7 @@
     </select>
     <button type="submit" class="btn btn-secondary">Apply</button>
   </div>
-  
+
   <!-- Display the recipes in a table with checkboxes for each recipe -->
   <div class="table-responsive">
     <table class="table table-bordered table-hover">

@@ -1,0 +1,24 @@
+{% extends 'vege/base.html' %}
+
+{% block title %}Login Now{% endblock %}
+
+{% block heading %}Login Now{% endblock %}
+
+{% block content %}
+{% load static %}
+
+{% for message in messages %}
+    <h3>{{ message }}</h3>
+{% endfor %}
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <p>Username:</p>
+    <input type="text" name="username" required>
+    <p>Password:</p>
+    <input type="password" name="password" required><br>
+    <input type="submit" value="Login">
+</form>
+
+<p>Not registered yet? <a href="{% url 'register' %}">Register</a></p>
+{% endblock %}

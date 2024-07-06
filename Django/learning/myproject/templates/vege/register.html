@@ -1,0 +1,27 @@
+{% extends 'vege/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block heading %}Sign up Below{% endblock %}
+
+{% block content %}
+{% for message in messages %}
+    <h5>{{ message }}</h5>
+{% endfor %}
+
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <p>Username:</p>
+    <input type="text" name="username" required>
+    <p>Email:</p>
+    <input type="email" name="email" required>
+    <p>Password:</p>
+    <input type="password" name="password" required>
+    <p>Confirm Password:</p>
+    <input type="password" name="password2" required>
+    <br><br>
+    <input type="submit" value="Sign Up">
+</form>
+
+<p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+{% endblock %}
