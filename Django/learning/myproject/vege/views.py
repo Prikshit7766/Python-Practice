@@ -86,7 +86,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect("index_demo")
+            return redirect("recipe")
         else:
             messages.info(request, "Invalid Credentials")
             return redirect("login")
