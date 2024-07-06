@@ -2,9 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Recipe
 from django.db.models import Q
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+@login_required(login_url='login')
 def recipe(request):
     if request.method == 'POST':
         recipe_name = request.POST.get('recipe_name')
@@ -92,3 +94,16 @@ def login(request):
             return redirect("login")
     else:
         return render(request, "vege/login.html")
+    
+
+def logout(request):
+    auth_logout(request)
+    return redirect("login")
+
+
+@login_required
+def profile(request):
+    context = {
+        'user': request.user
+    }
+    return render(request, 'vege/profile.html', context)

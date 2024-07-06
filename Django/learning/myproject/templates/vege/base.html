@@ -9,10 +9,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style2.css' %}">
      
     {% block extra_head %}{% endblock %}
+    
+    <style>
+        .container {
+            max-width: 1200px; /* Adjust max-width as per your design */
+            margin: 10 auto; /* Center the container horizontally */
+            padding: 10 20px; /* Optional padding for content inside the container */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>{% block heading %}Topic{% endblock %}</h1>
+        <h1>{% block heading %}{% endblock %}</h1>
         {% block link %}{% endblock %}
         <div class="content">
             {% block content %}{% endblock %}

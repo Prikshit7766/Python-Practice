@@ -1,0 +1,15 @@
+{% extends "vege/base.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h2 class="card-header">User Profile</h2>
+    <div class="card-body">
+      <h4 class="card-title">Username: {{ user.username }}</h4>
+      <!-- Add more user profile information as needed -->
+      <!-- Example: <p>Email: {{ user.email }}</p> -->
+    </div>
+  </div>
+
+{% endblock %}
