@@ -28,6 +28,7 @@ urlpatterns = [
     path('', views.home, name='home'),  # Home page
     path("myapp/", include("myapp.urls")), # this is the root URL, this will call the index function from views.py
     path("vege/", include("vege.urls")),
+    path("college/", include("college.urls")),
 ]
 
 if settings.DEBUG:
