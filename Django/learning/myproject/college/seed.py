@@ -12,10 +12,35 @@ def setup_django():
 
 fake = Faker()
 
-def create_students(num_students=10):
-    from college.models import Department, StudentID, Student
+def create_data():
+    from college.models import Department, StudentID, Student, Subject, SubjectMark
+
+    # Delete existing records
+    SubjectMark.objects.all().delete()
+    Subject.objects.all().delete()
+    Student.objects.all().delete()
+    StudentID.objects.all().delete()
+    Department.objects.all().delete()
+
+    # Create Departments
+    departments = ['Chemistry', 'Computer Science', 'Mathematics', 'Physics']
+    for dep in departments:
+        Department.objects.get_or_create(department=dep)
+
+    # Create Subjects
+    subjects = [
+        ('Chemistry', 'Organic Chemistry', 'CHE101'),
+        ('Computer Science', 'Data Structures', 'CSE201'),
+        ('Mathematics', 'Calculus', 'MATH101'),
+        ('Physics', 'Classical Mechanics', 'PHY101'),
+    ]
+    for dep_name, subj_name, subj_code in subjects:
+        department = Department.objects.get(department=dep_name)
+        Subject.objects.create(department=department, subject_name=subj_name, subject_code=subj_code)
+
+    # Create Students
     departments = list(Department.objects.all())
-    for _ in range(num_students):
+    for _ in range(20):
         department = random.choice(departments)
         student_id = StudentID.objects.create(student_id=fake.unique.random_number(digits=8))
         student = Student.objects.create(
@@ -29,14 +54,19 @@ def create_students(num_students=10):
         )
         print(f'Student {student.student_name} created.')
 
+    # Create SubjectMarks
+    students = list(Student.objects.all())
+    subjects = list(Subject.objects.all())
+    for student in students:
+        for subject in subjects:
+            SubjectMark.objects.create(
+                student=student,
+                subject=subject,
+                mark=random.randint(50, 100)
+            )
+
 if __name__ == '__main__':
-    print("Creating students...")
+    print("Creating data...")
     setup_django()
-    create_students(20)  # Create 20 students
-    print("Students created.")
-
-
-# Chemistry
-# Computer Science
-# Mathematics
-# Physics
+    create_data()
+    print("Data created.")
