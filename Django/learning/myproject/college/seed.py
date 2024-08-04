@@ -40,7 +40,7 @@ def create_data():
 
     # Create Students
     departments = list(Department.objects.all())
-    for _ in range(20):
+    for _ in range(500):
         department = random.choice(departments)
         student_id = StudentID.objects.create(student_id=fake.unique.random_number(digits=8))
         student = Student.objects.create(
