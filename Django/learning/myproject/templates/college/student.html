@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Student Details</title>
-    <!-- Add Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         table {
@@ -40,7 +39,6 @@
 <body>
     <div class="container">
         <h1 class="my-4">Student Details</h1>
-        <!-- Search Form -->
         <form method="GET" action="" class="filter-form form-inline">
             <div class="form-group">
                 <input type="text" name="q" class="form-control" placeholder="Search by name" value="{{ query|default:'' }}">
@@ -81,7 +79,7 @@
             <tbody>
                 {% for student in page_obj %}
                 <tr>
-                    <td>{{ student.student_id.student_id }}</td>
+                    <td><a href="{% url 'see_marks' student.student_id.student_id %}">{{ student.student_id.student_id }}</a></td>
                     <td>{{ student.student_name }}</td>
                     <td>{{ student.student_email }}</td>
                     <td>{{ student.student_age }}</td>
@@ -97,10 +95,10 @@
             <ul class="pagination justify-content-center">
                 {% if page_obj.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page=1&q={{ query }}&age_min={{ age_min }}&age_max={{ age_max }}{% for dept in departments %}&department={{ dept }}{% endfor %}">&laquo; First</a>
+                        <a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}{% if age_min %}&age_min={{ age_min }}{% endif %}{% if age_max %}&age_max={{ age_max }}{% endif %}{% for dept in departments %}&department={{ dept }}{% endfor %}">&laquo; First</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ query }}&age_min={{ age_min }}&age_max={{ age_max }}{% for dept in departments %}&department={{ dept }}{% endfor %}">Previous</a>
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if age_min %}&age_min={{ age_min }}{% endif %}{% if age_max %}&age_max={{ age_max }}{% endif %}{% for dept in departments %}&department={{ dept }}{% endfor %}">Previous</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
@@ -118,17 +116,17 @@
                         </li>
                     {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ num }}&q={{ query }}&age_min={{ age_min }}&age_max={{ age_max }}{% for dept in departments %}&department={{ dept }}{% endfor %}">{{ num }}</a>
+                            <a class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}{% if age_min %}&age_min={{ age_min }}{% endif %}{% if age_max %}&age_max={{ age_max }}{% endif %}{% for dept in departments %}&department={{ dept }}{% endfor %}">{{ num }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
 
                 {% if page_obj.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ query }}&age_min={{ age_min }}&age_max={{ age_max }}{% for dept in departments %}&department={{ dept }}{% endfor %}">Next</a>
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if age_min %}&age_min={{ age_min }}{% endif %}{% if age_max %}&age_max={{ age_max }}{% endif %}{% for dept in departments %}&department={{ dept }}{% endfor %}">Next</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&q={{ query }}&age_min={{ age_min }}&age_max={{ age_max }}{% for dept in departments %}&department={{ dept }}{% endfor %}">Last &raquo;</a>
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}{% if age_min %}&age_min={{ age_min }}{% endif %}{% if age_max %}&age_max={{ age_max }}{% endif %}{% for dept in departments %}&department={{ dept }}{% endfor %}">Last &raquo;</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
@@ -142,7 +140,6 @@
         </nav>
     </div>
 
-    <!-- Add Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

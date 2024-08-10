@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Student, Department
 from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404
+from .models import Student, SubjectMark
+from django.db.models import Sum
 
 def college(request):
     return HttpResponse('Welcome to College')
@@ -44,3 +47,8 @@ def student(request):
         'age_max': age_max,
         'all_departments': all_departments
     })
+
+def see_marks(request, student_id):
+    queryset = SubjectMark.objects.filter(student__student_id__student_id=student_id)
+    total_marks = queryset.aggregate(total_marks=Sum('mark'))['total_marks'] or 0
+    return render(request, 'college/see_marks.html', {'queryset': queryset, 'total_marks': total_marks})

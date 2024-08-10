@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Marks</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Marks for Student: {{ queryset.first.student.student_name }}</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Mark</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mark in queryset %}
+                <tr>
+                    <td>{{ mark.subject.subject_name }}</td>
+                    <td>{{ mark.mark }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td><strong>Total Marks</strong></td>
+                    <td><strong>{{ total_marks }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'student_list' %}" class="btn btn-primary">Back to Student List</a>
+    </div>
+</body>
+</html>
