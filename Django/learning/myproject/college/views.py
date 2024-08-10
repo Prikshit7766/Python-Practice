@@ -1,16 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Student, Department
-from django.core.paginator import Paginator\
-
+from django.core.paginator import Paginator
 
 def college(request):
     return HttpResponse('Welcome to College')
-
-def student(request):
-    students = Student.objects.all()
-    return render(request, 'college/student.html', {'students': students})
-
 
 def student(request):
     query = request.GET.get('q')
@@ -18,22 +12,30 @@ def student(request):
     age_min = request.GET.get('age_min')
     age_max = request.GET.get('age_max')
 
+    if query == 'None':
+        query = None
+    if age_min == 'None':
+        age_min = None
+    if age_max == 'None':
+        age_max = None
+
     students_list = Student.objects.all()
 
     if query:
         students_list = students_list.filter(student_name__icontains=query)
     if departments:
         students_list = students_list.filter(department__department__in=departments)
-    if age_min:
-        students_list = students_list.filter(student_age__gte=age_min)
-    if age_max:
-        students_list = students_list.filter(student_age__lte=age_max)
+    if age_min and age_min.isdigit():
+        students_list = students_list.filter(student_age__gte=int(age_min))
+    if age_max and age_max.isdigit():
+        students_list = students_list.filter(student_age__lte=int(age_max))
 
     paginator = Paginator(students_list, 10)  # Show 10 students per page
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     all_departments = Department.objects.all()
+
     return render(request, 'college/student.html', {
         'page_obj': page_obj,
         'query': query,
